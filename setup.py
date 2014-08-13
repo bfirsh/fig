@@ -8,20 +8,18 @@ import os
 import re
 import sys
 
+import versioneer
+versioneer.VCS = 'git'
+versioneer.versionfile_source = 'fig/_version.py'
+versioneer.versionfile_build = 'fig/_version.py'
+versioneer.tag_prefix = '' # tags are like 1.2.0
+versioneer.parentdir_prefix = 'fig-' # dirname like 'myproject-1.2.0'
 
 def read(*parts):
     path = os.path.join(os.path.dirname(__file__), *parts)
     with codecs.open(path, encoding='utf-8') as fobj:
         return fobj.read()
 
-
-def find_version(*file_paths):
-    version_file = read(*file_paths)
-    version_match = re.search(r"^__version__ = ['\"]([^'\"]*)['\"]",
-                              version_file, re.M)
-    if version_match:
-        return version_match.group(1)
-    raise RuntimeError("Unable to find version string.")
 
 
 install_requires = [
@@ -49,7 +47,8 @@ if sys.version_info < (2, 7):
 
 setup(
     name='fig',
-    version=find_version("fig", "__init__.py"),
+    version=versioneer.get_version(),
+    cmdclass=versioneer.get_cmdclass(),
     description='Punctual, lightweight development environments using Docker',
     url='http://www.fig.sh/',
     author='Docker, Inc.',

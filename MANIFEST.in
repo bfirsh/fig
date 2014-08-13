@@ -8,3 +8,5 @@ recursive-exclude tests *
 global-exclude *.pyc
 global-exclude *.pyo
 global-exclude *.un~
+include versioneer.py
+include fig/_version.py

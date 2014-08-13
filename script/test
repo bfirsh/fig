@@ -1,5 +1,5 @@
 #!/bin/sh
 set -ex
 docker build -t fig .
-docker run -v /var/run/docker.sock:/var/run/docker.sock fig flake8 fig
+docker run -v /var/run/docker.sock:/var/run/docker.sock fig flake8 --exclude=_version.py fig
 docker run -v /var/run/docker.sock:/var/run/docker.sock fig nosetests $@
