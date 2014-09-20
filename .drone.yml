@@ -1,0 +1,8 @@
+image: ubuntu
+script:
+ - script/dind
+ - pip install -r requirements.txt
+ - pip install -r requirements-dev.txt
+ - script/validate-dco
+ - flake8 fig
+ - nosetests
